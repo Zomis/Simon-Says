@@ -3,6 +3,7 @@ package net.zomis.simon;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -60,7 +61,7 @@ public class GameScreen implements Screen {
 
     private void setButtonsEnabled(boolean enabled) {
         for (Button image : images) {
-            image.setDisabled(!enabled);
+            image.setTouchable(enabled ? Touchable.enabled : Touchable.disabled);
         }
     }
 
