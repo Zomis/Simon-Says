@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -55,7 +56,7 @@ public class GameScreen implements Screen {
 
     private void showSequence() {
         setButtonsEnabled(false);
-        showSequence(0);
+        showSequence(sequence.iterator());
     }
 
     private void setButtonsEnabled(boolean enabled) {
@@ -64,17 +65,17 @@ public class GameScreen implements Screen {
         }
     }
 
-    private void showSequence(final int index) {
-        if (sequence.size() <= index) {
+    private void showSequence(final Iterator<Integer> iterator) {
+        if (!iterator.hasNext()) {
             setButtonsEnabled(true);
             return;
         }
-        Integer i = sequence.get(index);
+        Integer i = iterator.next();
         Actor actor = images[i];
         actor.addAction(sequence(alpha(0.7f, fadeTime), alpha(1.0f, fadeTime), run(new Runnable() {
             @Override
             public void run() {
-                showSequence(index + 1);
+                showSequence(iterator);
             }
         })));
     }
