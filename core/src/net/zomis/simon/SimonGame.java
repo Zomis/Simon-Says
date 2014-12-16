@@ -24,6 +24,7 @@ public class SimonGame extends Game {
         camera = new OrthographicCamera(800, 480);
         stage = new Stage(new FitViewport(800, 480, camera), batch);
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        setScreen(new MenuScreen(this));
         Gdx.input.setInputProcessor(stage);
 	}
 
@@ -37,4 +38,16 @@ public class SimonGame extends Game {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
 	}
+
+    public Camera getCamera() {
+        return camera;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Skin getSkin() {
+        return skin;
+    }
 }
