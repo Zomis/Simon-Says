@@ -11,23 +11,24 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 import java.util.LinkedList;
-import java.util.Random;
 
 /**
  * Created by Zomis on 2014-12-16.
  */
 public class GameScreen implements Screen {
     private final SimonGame game;
-    private final Button[] images = new Button[4];
+    private final Button[] images;
     private final LinkedList<Integer> sequence = new LinkedList<Integer>(); // GWT does not support 'Deque' interface
-    private final Random random = new Random();
     private final Table table = new Table();
-    private int sequenceLength = 3;
+    private final SequenceGenerator generator;
+    private final int numButtons;
 
-    public GameScreen(SimonGame game) {
+    public GameScreen(SimonGame game, int numButtons, SequenceGenerator generator) {
         this.game = game;
+        this.generator = generator;
+        this.numButtons = numButtons;
+        this.images = new Button[numButtons];
         table.setFillParent(true);
-        table.setDebug(true);
         for (int i = 0; i < images.length; i++) {
             final int index = i;
             images[i] = new TextButton("", game.getSkin());
@@ -47,11 +48,8 @@ public class GameScreen implements Screen {
 
     private void generateSequence() {
         sequence.clear();
-        for (int i = 0; i < sequenceLength; i++) {
-            sequence.add(random.nextInt(images.length));
-        }
+        generator.generate(numButtons, sequence);
         showSequence();
-        sequenceLength++;
     }
 
     private void showSequence() {

@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  */
 public class MenuScreen implements Screen {
 
+    private static final int NUM_BUTTONS = 4;
     private final SimonGame game;
     private final Table table;
 
@@ -19,11 +20,11 @@ public class MenuScreen implements Screen {
         this.table = new Table();
 
         table.setFillParent(true);
-        TextButton playButton = new TextButton("Play", game.getSkin());
+        TextButton playButton = new TextButton("Simple", game.getSkin());
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new GameScreen(game, NUM_BUTTONS, new SimpleGenerator(3)));
             }
         });
         table.add(playButton).expand().fill();
