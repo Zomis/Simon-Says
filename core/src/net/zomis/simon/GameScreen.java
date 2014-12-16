@@ -22,6 +22,7 @@ public class GameScreen implements Screen {
     private final Table table = new Table();
     private final SequenceGenerator generator;
     private final int numButtons;
+    private static final float fadeTime = 0.7f;
 
     public GameScreen(SimonGame game, int numButtons, SequenceGenerator generator) {
         this.game = game;
@@ -70,7 +71,7 @@ public class GameScreen implements Screen {
         }
         Integer i = sequence.get(index);
         Actor actor = images[i];
-        actor.addAction(sequence(alpha(0.7f, 1.0f), alpha(1.0f, 1.0f), run(new Runnable() {
+        actor.addAction(sequence(alpha(0.7f, fadeTime), alpha(1.0f, fadeTime), run(new Runnable() {
             @Override
             public void run() {
                 showSequence(index + 1);
