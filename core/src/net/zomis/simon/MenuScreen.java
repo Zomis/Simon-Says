@@ -20,11 +20,15 @@ public class MenuScreen implements Screen {
         this.table = new Table();
 
         table.setFillParent(true);
-        TextButton playButton = new TextButton("Simple", game.getSkin());
+        addPlayButton("Random", NUM_BUTTONS, new SimpleGenerator(3));
+    }
+
+    private void addPlayButton(String text, final int numButtons, final SequenceGenerator generator) {
+        TextButton playButton = new TextButton(text, game.getSkin());
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game, NUM_BUTTONS, new SimpleGenerator(3)));
+                game.setScreen(new GameScreen(game, numButtons, generator));
             }
         });
         table.add(playButton).expand().fill();
