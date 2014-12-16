@@ -20,6 +20,7 @@ public class MenuScreen implements Screen {
         this.table = new Table();
 
         table.setFillParent(true);
+        addPlayButton("Simple", NUM_BUTTONS, new AppendingGenerator(3));
         addPlayButton("Random", NUM_BUTTONS, new SimpleGenerator(3));
     }
 
