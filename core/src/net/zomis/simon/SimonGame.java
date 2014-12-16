@@ -32,16 +32,13 @@ public class SimonGame extends Game {
 	public void render () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.setProjectionMatrix(camera.combined);
 		batch.begin();
         super.render();
         batch.end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
 	}
-
-    public Camera getCamera() {
-        return camera;
-    }
 
     public Stage getStage() {
         return stage;
